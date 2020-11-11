@@ -1,30 +1,46 @@
-var fixedRect, movingRect;
+var rect1
+var rect2
+
 
 function setup() {
-  createCanvas(1200,800);
-  fixedRect = createSprite(600, 400, 50, 80);
-  fixedRect.shapeColor = "green";
-  fixedRect.debug = true;
-  movingRect = createSprite(400,200,80,30);
-  movingRect.shapeColor = "green";
-  movingRect.debug = true;
+  createCanvas(800,400);
+ rect1 =  createSprite(400, 200, 50, 50);
+ rect1.shapeColor = "green"
+ rect1.velocityX = 5
+ rect1.velocityY = 5
+ 
+ rect2 = createSprite(100,100,50,50);
+ rect2.shapeColor = "green"
+ rect2.velocityX = 5
+ rect2.velocityY = 5
+
+ rect3 =  createSprite(100, 200, 50, 50);
+ rect3.shapeColor = "green"
+ rect3.velocityX = 5
+ rect3.velocityY = 5
+ 
 }
 
 function draw() {
-  background(0,0,0);  
-  movingRect.x = World.mouseX;
-  movingRect.y = World.mouseY;
+  background(0);
+  
+  rect2.x = World.mouseX
+  rect2.y = World.mouseY
 
-  if (movingRect.x - fixedRect.x < fixedRect.width/2 + movingRect.width/2
-      && fixedRect.x - movingRect.x < fixedRect.width/2 + movingRect.width/2
-      && movingRect.y - fixedRect.y < fixedRect.height/2 + movingRect.height/2
-      && fixedRect.y - movingRect.y < fixedRect.height/2 + movingRect.height/2) {
-    movingRect.shapeColor = "red";
-    fixedRect.shapeColor = "red";
+  if(isTouching(rect1, rect2))
+    {
+  
+      rect1.shapeColor = "red"
+      rect2.shapeColor = "red"
+    }
+  else
+  {
+    rect1.shapeColor = "green"
+    rect2.shapeColor = "green"
   }
-  else {
-    movingRect.shapeColor = "green";
-    fixedRect.shapeColor = "green";
-  }
+
+  
+  
+  bounceOff(rect3,rect2);
   drawSprites();
 }
